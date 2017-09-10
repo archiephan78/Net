@@ -16,7 +16,7 @@ Trên thực tế, các card mạng (NIC) chỉ có thể kết nối với nhau
 
 Từ đó, ta có giao thức phân giải địa chỉ ARP - Address Resolution Protocol giải quyết vấn đề trên.
 
-## 1.2. ARP là gì?
+ 1.2. ARP là gì?
 
 – ARP là phương thức phân giải địa chỉ động giữa địa chỉ lớp network và địa chỉ lớp datalink. Quá trình thực hiện bằng cách: một thiết bị IP trong mạng gửi một gói tin local broadcast đến toàn mạng yêu cầu thiết bị khác gửi trả lại địa chỉ phần cứng ( địa chỉ lớp datalink ) hay còn gọi là Mac Address của mình.
 
