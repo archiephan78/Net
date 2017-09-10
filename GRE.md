@@ -53,8 +53,8 @@
 
   <img src = http://i.imgur.com/Fa2zSmZ.png >
   
-  Router 5:
+   - Router 5:
   <img src =http://i.imgur.com/yRsbSOZ.png>
   
-  Router 9:
+   - Router 9:
   <img src=http://i.imgur.com/hZ4J4fu.png>
