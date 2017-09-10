@@ -76,6 +76,7 @@
     
  3.**Các loại ICMP message thường thấy**
  
+    
     3.1 ICMP echo messages
 
   - Có hai loại là echo request và echo reply message tương ứng với Với các trường:
