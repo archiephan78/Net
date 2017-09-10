@@ -76,7 +76,6 @@ Cấu trúc bản tin ARP được mô tả như hình sau:
 
 3. **Cách thức hoạt động của ARP**
 
-
  3.1. Hoạt động của ARP trong mạng LAN
 
   - Máy gửi kiểm tra cache của mình. Nếu đã có thông tin về sự ánh xạ giữa địa chỉ IP và địa chỉ MAC thì kết thúc 
