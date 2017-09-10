@@ -58,3 +58,5 @@
   
    - Router 9:
   <img src=http://i.imgur.com/hZ4J4fu.png>
+  
+  - Lab thứ 2 dựng trên OpenvSwitch như http://docs.openvswitch.org/en/latest/howto/tunneling/
