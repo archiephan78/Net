@@ -58,4 +58,4 @@ Hệ thống tên miền được phân thành nhiều cấp
    - **TTL** : là thời gian cache của bản ghi DNS trên một máy chủ tên miền trước khi máy chủ đó tìm kiếm 1 phiên bản cập nhật.
    - **Bản ghi SOA** : Thông thường mỗi tên miền sẽ sử dụng một cặp DNS nào đó để trỏ về  1 hoặc nhiều máy chủ DNS, và ở đây các máy chủ DNS các máy chủ DNS có trách nhiệm cung cập thông tin bản ghi DNS của hệ thống cho tên miền này để nó hoạt động. SOA đươc coi như dấu hiệu nhận biêt của hệ thống tên miền này
 
-   ![alt text](https://imgur.com/gzBaNVO)
+   <img src=https://imgur.com/gzBaNVO>
