@@ -1,8 +1,8 @@
-# **TÌM HIỂU GIAO THỨC ARP**
+### ***TÌM HIỂU GIAO THỨC ARP***
 
-# 1. Giới thiệu giao thức ARP
+ 1. **Giới thiệu giao thức ARP**
 
-## 1.1. Đặt vấn đề
+ 1.1. Đặt vấn đề
 
 Trong một hệ thống mạng máy tính, có 2 địa chỉ được gán cho máy tính là: 
 
@@ -24,7 +24,7 @@ Từ đó, ta có giao thức phân giải địa chỉ ARP - Address Resolution
 
 – Ban đầu ARP chỉ được sử dụng trong mạng Ethernet để phân giải địa chỉ IP và địa chỉ MAC. Nhưng ngày nay ARP đã được ứng dụng rộng rãi và dùng trong các công nghệ khác dựa trên lớp hai.
 
-# 2. Cấu trúc bản tin ARP
+ 2. **Cấu trúc bản tin ARP**
 
 Kích thước bản tin ARP là 28 byte, được đóng gói trong frame Ethernet II nên trong mô hình OSI, ARP được coi như là giao thức lớp 3 cấp thấp.
 
@@ -73,3 +73,57 @@ Cấu trúc bản tin ARP được mô tả như hình sau:
   - Trong bản tin ARP reply: Trường này sẽ điền địa chỉ của máy gửi bản tin ARP request.
 
 - **Target protocol address (PTA):** Xác định địa chỉ IP máy gửi (máy cần tìm).
+
+3. **Cách thức hoạt động của ARP**
+
+
+ 3.1. Hoạt động của ARP trong mạng LAN
+
+  - Máy gửi kiểm tra cache của mình. Nếu đã có thông tin về sự ánh xạ giữa địa chỉ IP và địa chỉ MAC thì kết thúc 
+
+  - Máy gửi khởi tạo gói tin ARP request với địa chỉ SHA và SPA là địa chỉ của nó, và địa chỉ TPA là địa chỉ IP của máy cần biết MAC. (Trường THA để giá trị toàn 0 để biểu hiện là chưa tìm được địa chỉ MAC)
+
+  - Gửi quảng bá gói tin ARP trên toàn mạng (Địa chỉ MAC đích của gói tin Ethernet II là địa chỉ MAC quảng bá ff:ff:ff:ff:ff:ff).
+
+  - Các thiết bị trong mạng đều nhận được gói tin ARP request. Gói tin được xử lý bằng cách các thiết bị đều nhìn vào trường địa chỉ Target Protocol Address. 
+
+    + Các thiết bị không trùng địa chỉ TPA thì hủy gói tin.
+
+    + Thiết bị với IP trùng với IP trong trường Target Protocol Address sẽ bắt đầu quá trình khởi tạo gói tin ARP Reply bằng cách lấy các trường Sender Hardware Address và Sender Protocol Address trong gói tin ARP nhận được đưa vào làm Target trong gói tin gửi đi. Đồng thời thiết bị sẽ lấy địa chỉ MAC của mình để đưa vào trường Sender Hardware Address. Đồng thời cập nhất giá trị ánh xạ địa chỉ IP và MAC của máy gửi vào bảng ARP cache của mình để giảm thời gian xử lý cho các lần sau.
+
+ - Thiết bị đích bắt đầu gửi gói tin Reply đã được khởi tạo đến thiết bị nguồn vừa gửi bản tin ARP request. Gói tin reply là gói tin gửi unicast.
+
+ - Thiết bị nguồn nhận được gói tin reply và xử lý bằng cách lưu trường Sender Hardware Address trong gói reply như địa chỉ phần cứng của thiết bị đích cần tìm.
+
+ - Thiết bị nguồn update vào ARP cache của mình giá trị tương ứng giữa địa chỉ IP và địa chỉ MAC của thiết bị đích. Lần sau sẽ không còn cần tới ARP request.
+ 
+3.2. Hoạt động của ARP trong môi trường liên mạng
+
+Hoạt động của ARP trong một môi trường phức tạp hơn đó là hai hệ thống mạng gắn với nhau thông qua một Router.
+
+ - Máy A thuộc mạng A muốn gửi gói tin tới máy B thuộc mạng B. 2 mạng này kết nối với nhau thông qua router C.
+
+ - Do các broadcast lớp MAC không thể truyền qua Router nên khi đó máy A sẽ xem Router C như một cầu nối hay một trung gian  (Agent) để truyền dữ liệu. Trước đó, máy A sẽ biết được địa chỉ IP của Router C (địa chỉ Gateway)  và biết được rằng để truyền gói tin tới B phải đi qua C.
+
+ - Để tới được router C thì máy A phải gửi gói tin tới port X của router C (là gateway trong LAN A). Quy trình truyền dữ liệu được mô tả như sau:
+
+  + Máy A gửi ARP request để tìm MAC của port X.
+
+  + Router C trả lời, cung cấp cho A địa chỉ MAC của port X.
+
+  + Máy A truyền gói tin tới port X của router C (với địa chỉ MAC đích là MAC của port X, IP đích là IP máy B).
+
+  + Router C nhận được gói tin của A, forward ra port Y. Trong gói tin có chứa địa chỉ IP máy B, router C sẽ gửi ARP request để tìm MAC của máy B.
+
+  + Máy B sẽ trả lời router C MAC của mình, sau đó router sẽ gửi gói tin của A tới B.
+
+  <img src="http://imgur.com/XXIaITr.jpg">
+
+
+ Trên thực tế ngoài dạng bảng định tuyến này người ta còn dùng phương pháp **proxy ARP** (sẽ tìm hiểu phần sau), trong đó có một thiết bị đảm nhận nhiệm vụ phân giải địa chỉ cho tất cả các thiết bị khác. Theo đó các máy trạm không cần giữ bảng định tuyến nữa Router C sẽ có nhiệm vụ thực hiện, trả lời tất cả các ARP request của tất cả các máy.
+ 
+ 3.3 Proxy ARP
+
+ ARP được thiết kế cho các thiết bị nằm trong nội mạng, có tính chất local. Tuy nhiên nếu hai thiết bị A và B bị chia cắt bởi 1 router thì chúng sẽ được coi như là không local với nhau nữa. Khi A muốn gửi thông tin đến B, A sẽ không gửi trực tiếp được đến B theo địa chỉ lớp hai, mà phải gửi qua router và được coi là cách nhau 1 hop ở lớp ba.
+
+ - Công nghệ này nhắm đáp ứng cho việc gửi bản tin trong môi trường liên mạng. Router nằm giữa 2 mạng local sẽ được cấu hình để đáp ứng các gói tin broadcast gửi từ A thay cho B.
