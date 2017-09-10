@@ -59,3 +59,13 @@ Hệ thống tên miền được phân thành nhiều cấp
    - **Bản ghi SOA** : Thông thường mỗi tên miền sẽ sử dụng một cặp DNS nào đó để trỏ về  1 hoặc nhiều máy chủ DNS, và ở đây các máy chủ DNS các máy chủ DNS có trách nhiệm cung cập thông tin bản ghi DNS của hệ thống cho tên miền này để nó hoạt động. SOA đươc coi như dấu hiệu nhận biêt của hệ thống tên miền này
 
    <img src=http://i.imgur.com/gzBaNVO.jpg>
+ 
+ 3.**Moo hình lab**
+ 
+  - Môi truờng : VMware
+
+  - DNS Server : Ubuntu 16.04 Server , NIC host only 1 ( ens33), IP 192.168.1.2
+
+  - DNS Client : Ubuntu 16.04 Server , NIC host only 1 ( ens33), IP 192.168.1.10
+
+<img src =http://i.imgur.com/QA3JeRv.png >
