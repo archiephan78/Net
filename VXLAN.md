@@ -30,7 +30,7 @@
     với outer MAC header, outer IP header và VXLAN header. Gói tin đầy đủ được gửi đến mạng IP với địa chỉ IP đích của remote 
     VTEP được kết nối với VM đích. Remote VTEP decapsulates packet và forward frame đến VM được kết nối. Remote VTEP cũng học 
     địa chỉ inner Source MAC và địa chỉ outer Source IP .
-    - 2. VM-to-VM communication : Broadcast và Unknown Unicast traffic
+    - 2.VM-to-VM communication : Broadcast và Unknown Unicast traffic
     VM trong server bên trái muốn truyền thông với VM trong server bên phải trong cùng 1 subnet. VM sử gửi gói tin ARP 
     Broadcast, UDP header và VXLAN header. Tuy nhiên, gói tin này được gửi đến IP Multicast group mà liên kết với VXLAN ID. 
     VTEP sẽ gửi đi gói tin IGMP Membership Report tới upstream router để kết nối/ rời IP multicast groups liên quan đến VXLAN. 
