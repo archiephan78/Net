@@ -113,7 +113,9 @@
     
     4.2. Cấp phát dhcp cho client
     
-       Khởi động máy client và kiểm tra cấu hình dhcp
+     - Khởi động máy client và kiểm tra cấu hình dhcp
+       
+       
       ```
        ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.1.21  netmask 255.255.255.0  broadcast 192.168.1.255
