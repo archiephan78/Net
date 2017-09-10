@@ -69,3 +69,91 @@ Hệ thống tên miền được phân thành nhiều cấp
   - DNS Client : Ubuntu 16.04 Server , NIC host only 1 ( ens33), IP 192.168.1.10
 
 <img src =http://i.imgur.com/QA3JeRv.png >
+
+  3.1 Cấu hình DNS server
+
+  - caif đặt bind9
+  
+  ```
+  sudo apt-get install bind9 bind9utils
+  ```
+  - Sửa file config
+  
+  ```
+  sudo nano /etc/bind/named.conf.options
+  
+  acl "trusted" {
+        192.168.1.2;    
+        };
+        
+        ...
+        recursion yes;                
+        allow-recursion { trusted; };  
+        listen-on { 192.168.1.2; };   
+        allow-transfer { none; };      
+
+        forwarders {
+                8.8.8.8;
+                8.8.4.4;
+        };
+        ...
+   ```
+   
+   - Tạo zone
+   
+   ```
+   sudo nano /etc/bind/named.conf.local
+   
+   zone "chungpt.local" {
+    type master;
+    file "/etc/bind/zones/db.chungpt.local";
+    allow-transfer { 192.168.1.2; };
+};
+```
+  - Tạo các bản ghi
+  
+  ```
+  sudo vim /etc/bind/zones/db.chungpt.local
+  
+  $TTL    604800
+@       IN      SOA     ns.chungpt.local. admin.chungpt.local. (
+                  3     ; Serial
+             604800     ; Refresh
+              86400     ; Retry
+            2419200     ; Expire
+             604800 )   ; Negative Cache TTL
+;
+; name servers - NS records
+     IN      NS      ns.chungpt.local.
+
+; name servers - A records
+ns.chungpt.local.          IN      A       192.168.1.2
+```
+
+  - Restart Service
+  ```
+  sudo systemctl restart bind9
+  ```
+  
+3.2. DNS Client
+
+  - Sửa config dns
+  ```
+  sudo vim /etc/network/interfaces
+  
+    dns-nameservers 192.168.1.2
+  ```
+  - Restart network
+  ```
+  sudo service networking restart
+  ```
+  - Test DNS
+  ```
+  nslookup
+  > ns.chungpt.local
+Server:     192.168.1.2
+Address:    192.168.1.2#53
+
+Name:   ns.chungpt.local
+Address: 192.168.1.2
+```
