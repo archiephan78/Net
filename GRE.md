@@ -70,16 +70,20 @@
   ip addr add 10.0.0.134 dev tun9  
   ```
   - Config host B
-    ```
+  
+  
+  ```
   modprobe ip_gre
   ip tunnel add tun9 mode gre remote 192.168.100.130 local 192.168.100.128 ttl 255
   ip link set tun9 up
   ip addr add 10.0.0.135 dev tun9  
   ```
   - Check form host B 
+  
   <img src= http://i.imgur.com/Lvg3eRf.png>
   
   - Check form host A
+  
   <img src= http://i.imgur.com/TfZ283N.png>
 
   
