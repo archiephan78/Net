@@ -69,5 +69,6 @@
       
   => Ktra kết nối giữa VM1 và VM2
   
-  - Sơ đồ ý tưởng :
+ - Sơ đồ ý tưởng :
+  
   <img src =http://i.imgur.com/8mquQGy.png >
