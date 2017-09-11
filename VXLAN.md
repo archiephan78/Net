@@ -58,10 +58,12 @@
  3. ** Mô hình lab **
  
  - Ý tưởng : Tạo 2 máy ảo trên VMware cùng card mạng host only 1, trên các máy chạy Ubuntu 16.04 server cài OpenvSwitch, KVM với QEMU.
-      + Tạo 2 vSwitch ovs1 và ovs2 trên 2 máy
-      + Cấu hình bridge trên ovs2 trên cả 2 máy
-      + Cấu hình VXLAN tunnel cho vSwitch ovs1 ở cả 2 máy
-      + Trên máy ảo thứ 1 tạo 1 máy áo VM1 với  KVM kết nối với ovs1. Trên máy ảo 2 tạo 1 máy ảo VM2 kết nối với ovs1
+      - Tạo 2 vSwitch ovs1 và ovs2 trên 2 máy
+      - Cấu hình bridge trên ovs2 trên cả 2 máy
+      - Cấu hình VXLAN tunnel cho vSwitch ovs1 ở cả 2 máy
+      - Trên máy ảo thứ 1 tạo 1 máy áo VM1 với  KVM kết nối với ovs1. Trên máy ảo 2 tạo 1 máy ảo VM2 kết nối với ovs1
+      
   => Ktra kết nối giữa VM1 và VM2
+  
   - Sơ đồ ý tưởng :
   <img src =http://i.imgur.com/8mquQGy.png >
