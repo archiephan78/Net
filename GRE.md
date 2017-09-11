@@ -59,4 +59,29 @@
    - Router 9:
   <img src=http://i.imgur.com/hZ4J4fu.png>
   
-  - Lab thứ 2 dựng trên OpenvSwitch như http://docs.openvswitch.org/en/latest/howto/tunneling/
+  - Mô hình lab :
+  <img src=http://i.imgur.com/zOeASnR.png>
+  
+  - Config Host A
+  ```
+  modprobe ip_gre
+  ip tunnel add tun9 mode gre remote 192.168.90.128 local 192.168.100.130 ttl 255
+  ip link set tun9 up
+  ip addr add 10.0.0.134 dev tun9  
+  ```
+  - Config host B
+    ```
+  modprobe ip_gre
+  ip tunnel add tun9 mode gre remote 192.168.100.130 local 192.168.100.128 ttl 255
+  ip link set tun9 up
+  ip addr add 10.0.0.135 dev tun9  
+  ```
+  - Check form host B 
+  <img src= http://i.imgur.com/Lvg3eRf.png>
+  
+  - Check form host A
+  <img src= http://i.imgur.com/TfZ283N.png>
+
+  
+  
+  
