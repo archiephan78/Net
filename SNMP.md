@@ -184,3 +184,9 @@ II. **SNMP hoạt động như thế nào**:
   <img src=https://i.imgur.com/ktr30uc.png>
   
   - Cấu hình threshold và noti để setting các arlet sẽ gửi mail
+
+3. Cấu hình PRTG monitoring linux system
+
+- hiện tại cấu hình chưa ra đồ thị, đang theo dõi thêm
+
+<img src=https://i.imgur.com/92gUL3x.png>
