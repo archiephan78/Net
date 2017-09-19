@@ -159,6 +159,8 @@ II. **SNMP hoạt động như thế nào**:
   - Vào new graph tạo Graph và kết quả ta đã có graph ( config hiện thị ở thanh toolbar ngay trên)
 
   <img src= https://i.imgur.com/y2c7QgM.png >
+  
+  - Có vẻ như cacti poll mỗi 5ph/1 lần, để chỉnh về ngắn hơn khả năng là khá khó 
 
 3. Cấu hình arlet đến mail
 
@@ -180,3 +182,5 @@ II. **SNMP hoạt động như thế nào**:
   - Save lại và thử test  email
 
   <img src=https://i.imgur.com/ktr30uc.png>
+  
+  - Cấu hình threshold và noti để setting các arlet sẽ gửi mail
