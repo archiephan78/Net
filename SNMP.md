@@ -192,3 +192,7 @@ II. **SNMP hoạt động như thế nào**:
   - hiện tại cấu hình chưa ra đồ thị, đang theo dõi thêm
 
 <img src=https://i.imgur.com/92gUL3x.png>
+
+  - Update sáng nay dậy đã lên đồ thị
+  
+ <img src=https://i.imgur.com/dVnEhSM.png>
