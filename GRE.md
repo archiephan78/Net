@@ -46,46 +46,61 @@
     
     - Đối với các mGRE Tunnel thì mỗi router chỉ có một Tunnel được cấu hình cùng một subnet logical.
     <img src= http://i.imgur.com/YHuKkUk.jpg>
-    
-    ***nguồn : vnpro***
-    
+
+
   3. Mô hình lab
 
-  <img src = http://i.imgur.com/Fa2zSmZ.png >
-  
-   - Router 5:
-  <img src =http://i.imgur.com/yRsbSOZ.png>
-  
-   - Router 9:
-  <img src=http://i.imgur.com/hZ4J4fu.png>
-  
+
   - Mô hình lab :
-  <img src=http://i.imgur.com/zOeASnR.png>
+  <img src=https://i.imgur.com/DHz9C8e.png>
   
   - Config Host A
   ```
   modprobe ip_gre
-  ip tunnel add tun9 mode gre remote 192.168.90.128 local 192.168.100.130 ttl 255
-  ip link set tun9 up
-  ip addr add 10.0.0.134 dev tun9  
+  ip tunnel add gre1 mode gre remote 10.0.0.133 local 10.0.0.132 ttl 255
+  ip link set gre1 up
+  ip addr add 10.10.10.1 dev gre1  
   ```
   - Config host B
   
-  
   ```
   modprobe ip_gre
-  ip tunnel add tun9 mode gre remote 192.168.100.130 local 192.168.100.128 ttl 255
-  ip link set tun9 up
-  ip addr add 10.0.0.135 dev tun9  
+  ip tunnel add gre1 mode gre remote 10.0.0.132 local 10.0.0.133 ttl 255
+  ip link set gre1 up
+  ip addr add 10.10.10.2 dev gre1  
   ```
-  - Check form host B 
+  - ip route trên host1
   
-  <img src= http://i.imgur.com/Lvg3eRf.png>
+  ```
+  ip r ad 172.16.10.0/24 via 10.10.10.1
+  ```
   
-  - Check form host A
+  <img src= https://i.imgur.com/bEobbRn.png>
   
-  <img src= http://i.imgur.com/TfZ283N.png>
-
+  - ip route trên host2
+  
+  ```
+  ip r ad 192.168.90.0/24 via 10.10.10.2
+  ```
+  
+  <img src= https://i.imgur.com/pdfRQz1.png>
+  
+  - ping từ client 1 đến client 2
+  
+  < img src= https://i.imgur.com/o1mwQqZ.png>
+  
+  - tcpdumb on gre1
+  
+  <img src= https://i.imgur.com/oH0abes.png >
+  
+  - ssh client1-> client2
+  
+  <img src= https://i.imgur.com/I0tuMO7.png >
+  
+  -ssh client2 -> client1
+  
+  <img src= https://i.imgur.com/t7RdZLa.png >
+  
   
   
   
