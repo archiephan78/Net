@@ -56,19 +56,47 @@
  <img src=http://i.imgur.com/dgSHt4q.jpg>
  
  3. ** Mô hình lab **
- 
- - Ý tưởng : Tạo 2 máy ảo trên VMware cùng card mạng host only 1, trên các máy chạy Ubuntu 16.04 server cài OpenvSwitch, KVM với QEMU.
- 
-        - Tạo 2 vSwitch ovs1 và ovs2 trên 2 máy
-        
-        - Cấu hình bridge trên ovs2 trên cả 2 máy
-        
-        - Cấu hình VXLAN tunnel cho vSwitch ovs1 ở cả 2 máy
-        
-        - Trên máy ảo thứ 1 tạo 1 máy áo VM1 với  KVM kết nối với ovs1. Trên máy ảo 2 tạo 1 máy ảo VM2 kết nối với ovs1
-      
-  => Ktra kết nối giữa VM1 và VM2
   
- - Sơ đồ ý tưởng :
+  <img src =https://i.imgur.com/HL8kl4K.png>
   
-  <img src =http://i.imgur.com/8mquQGy.png >
+  - Cấu hình trên host 1:
+  
+  ```
+  ip link add vxlan0 type vxlan id 42 group 239.1.1.1 dev ens33 dstport 4789
+  ifconfig vxlan1 192.20.0.1/24
+  ip link set vxlan0 up
+  ip r ad 172.16.10.0/24 via 192.20.0.2
+  ```
+  - Cấu hình trên host 2:
+  
+  ```
+  ip link add vxlan0 type vxlan id 42 group 239.1.1.1 dev ens33 dstport 4789
+  ifconfig vxlan1 192.20.0.2/24
+  ip link set vxlan0 up
+  ip r ad 192.168.90.0/24 via 192.20.0.1
+  ```
+  
+  - test ping client1 -> client2
+  
+  <img src=https://i.imgur.com/Y6wsUXO.png>
+  
+  - tcpdumb on vxlan0
+  
+  <img src=https://i.imgur.com/HMBbqEd.png>
+  
+  - test ping client2 -> client1
+  
+  <img src=https://i.imgur.com/IkiCkJn.png>
+  
+  - ssh client1 -> client2
+  
+  <img src = https://i.imgur.com/quF0ZU3.png>
+  
+  -ssh client2 -> client1
+  
+  <img src=https://i.imgur.com/g28h23E.png>
+  
+  - curl client2-> client1
+  
+  <img src=https://i.imgur.com/waqhyeQ.png>
+  
