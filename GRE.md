@@ -52,7 +52,12 @@
 
 
   - Mô hình lab :
+  
   <img src=https://i.imgur.com/DHz9C8e.png>
+  
+  - Gateway client1: 192.168.90.129
+  
+  - Gateway client2: 172.16.10.128
   
   - Config Host A
   ```
