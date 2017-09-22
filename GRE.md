@@ -91,7 +91,7 @@
   
   - tcpdumb on gre1
   
-  <img src= https://i.imgur.com/oH0abes.png >
+  <img src= https://i.imgur.com/SERgilF.png >
   
   - ssh client1-> client2
   
